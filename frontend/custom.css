@@ -1,0 +1,47 @@
+/* Custom styles to match Figma design */
+
+/* Fix font rendering */
+html,
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure proper button styling */
+button {
+  font-family: "Poppins", sans-serif;
+  outline: none;
+}
+
+/* Ensure proper image rendering */
+img {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* Custom hover effects */
+.hover-scale {
+  transition: transform 0.2s ease-in-out;
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+/* Custom responsive adjustments */
+@media (max-width: 768px) {
+  .text-8xl {
+    font-size: 4rem;
+    line-height: 1.1;
+  }
+
+  .text-3xl {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .text-8xl {
+    font-size: 3rem;
+  }
+}
