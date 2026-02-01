@@ -93,14 +93,18 @@ LoreZone is an intelligent **outfit recommendation system** that provides person
 - **CORS** (v2.8.5) - Cross-origin resource sharing
 - **dotenv** (v16.4.7) - Environment variables
 - **Morgan** (v1.10.0) - HTTP request logger
+- **Axios** - HTTP client for API requests
 
-### Database
+### Database & Cloud Services
 - **MySQL** - Relational database management
+- **AWS RDS** - Cloud database hosting
+- **AWS S3** - Cloud storage for images and media files
 
 ### Deployment
 - **Frontend:** Netlify
 - **Backend:** Render
-- **Database:** MySQL Cloud Service
+- **Database:** AWS RDS (MySQL)
+- **Storage:** AWS S3
 
 ---
 
@@ -384,7 +388,8 @@ This project was developed as a collaborative effort by a dedicated team of deve
 
 For any inquiries or support, please reach out:
 
-- **GitHub**: [YOUR_GITHUB_USERNAME](https://github.com/YOUR_GITHUB_USERNAME)
+- **GitHub**: [Bhargavk055](https://github.com/Bhargavk055)
+- **Email**: korupolu1681@gmail.com
 - **Live Demo**: [https://astonishing-travesseiro-449987.netlify.app/](https://astonishing-travesseiro-449987.netlify.app/)
 
 ---
