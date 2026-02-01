@@ -201,8 +201,8 @@ LoreZone/
 ### 1️⃣ Clone the Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/LoreZone.git
-cd LoreZone
+git clone https://github.com/Bhargavk055/LoreZone-AI-Based-Outfit-Recommendation-System.git
+cd LoreZone-AI-Based-Outfit-Recommendation-System
 ```
 
 ### 2️⃣ Backend Setup
