@@ -1,6 +1,6 @@
 @echo off
 echo ===================================================
-echo   LOREZONE STABILIZER & STARTER 🚀
+echo   LOREZONE STABILIZER ^& STARTER 🚀
 echo ===================================================
 
 echo [1/3] Killing Zombie Node Processes... 🧟
