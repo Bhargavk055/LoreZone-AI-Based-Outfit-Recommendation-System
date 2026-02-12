@@ -1,13 +1,13 @@
-const pool = require('../config/db'); 
+const pool = require('../config/db');
 
-const getAllEvents = async () => {
+const getAllBrands = async () => {
   try {
-    const [rows] = await pool.execute("SELECT * FROM brands"); 
+    const [rows] = await pool.execute("SELECT * FROM brands");
     return rows;
   } catch (error) {
-    console.error("Database Error:", error.message); 
+    console.error("Database Error:", error.message);
     throw error;
   }
 };
 
-module.exports = { getAllEvents };
+module.exports = { getAllBrands };

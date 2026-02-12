@@ -8,6 +8,9 @@ const dreamBigRoutes = require("./routes/dreamBigRoutes");
 const postRoutes = require("./routes/postRoutes");
 const brandRoutes = require("./routes/brandRoutes");
 const watchmeRoutes = require("./routes/watchmeRoutes");
+const authRoutes = require("./routes/authRoutes");
+const aiRoutes = require("./routes/aiRoutes");
+const commentRoutes = require("./routes/commentRoutes");
 
 const app = express();
 
@@ -24,6 +27,8 @@ app.use(
 );
 
 app.use(express.json());
+app.use('/uploads', express.static('uploads'));
+app.use('/images', express.static('public/images'));
 
 // Register Routes
 app.use("/api/trend", trendRoutes);
@@ -32,6 +37,14 @@ app.use("/api/dream", dreamBigRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/brand", brandRoutes);
 app.use("/api/watchme", watchmeRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/ai", aiRoutes);
+
+app.use("/api/comments", commentRoutes);
+const userRoutes = require("./routes/userRoutes");
+app.use("/api/user", userRoutes);
+const adminRoutes = require("./routes/adminRoutes");
+app.use("/api/admin", adminRoutes);
 
 app.get("/", (req, res) => {
   res.send("API is running...");

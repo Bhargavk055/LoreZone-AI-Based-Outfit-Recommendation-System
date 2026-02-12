@@ -1,13 +1,13 @@
-const Event = require('../models/brandModel');
+const Brand = require('../models/brandModel');
 
-const getEvents = async (req, res) => { 
+const getBrands = async (req, res) => {
     try {
-        const events = await Event.getAllEvents(); 
-        res.json(events);
+        const brands = await Brand.getAllBrands();
+        res.json(brands);
     } catch (err) {
-        console.error("Error fetching events:", err);
+        console.error("Error fetching brands:", err);
         res.status(500).json({ error: "Database error" });
     }
 };
 
-module.exports = { getEvents };
+module.exports = { getBrands };

@@ -1,133 +1,136 @@
-import { useState } from 'react';
+import React, { useState, useEffect } from "react";
+import { Container, Row, Col, Button, Form, Badge } from "react-bootstrap";
 import Navbar from "./Navbar";
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-
-const dummyTrends = [
-  {
-    id: 1,
-    trend_type: 'Clothing Trends',
-    style_name: 'Boho Bliss',
-    description: 'Free-spirited and vibrant, a mix of textures and earthy tones.',
-    size: 'XS, S, M, L, XL',
-    pic_url: "/images/ward8.jpg"
-  },
-  {
-    id: 2,
-    trend_type: 'Clothing Trends',
-    style_name: 'Urban Streetwear',
-    description: 'A fusion of hip-hop culture and high fashion.',
-    size: 'S, M, L, XL',
-    pic_url: "/images/ward3.jpg"
-  },
-  {
-    id: 5,
-    trend_type: 'Clothing Trends',
-    style_name: 'Monochrome Magic',
-    description: 'Timeless elegance in black and white.',
-    size: 'XS, S, M, L',
-    pic_url: "/images/ward5.webp"
-  },
-  {
-    id: 4,
-    trend_type: "Industry News",
-    style_name: "AI-Powered Custom Fits",
-    description: "Artificial Intelligence tailoring clothes based on user body data.",
-    pic_url: "/images/trending.png"
-  },
-  {
-    id: 5,
-    trend_type: "Industry News",
-    style_name: "Tech-Infused Wearables",
-    description: "Smart fashion integrating fitness tracking and LED styles.",
-    pic_url: "/images/trend2.png"
-  },
-  {
-    "id": 6,
-    trend_type: "Industry News",
-    style_name: "Zero-Waste Fashion",
-    description: "Innovative designs created with minimal fabric waste.",
-    pic_url: "/images/trending3.png"
-  }
-];
 
 const Trends = () => {
-  const [trends] = useState(dummyTrends);
-  const [filter, setFilter] = useState('Clothing Trends');
-  const [searchQuery, setSearchQuery] = useState('');
+  const [trends, setTrends] = useState([]);
+  const [filter, setFilter] = useState("All");
+  const [searchQuery, setSearchQuery] = useState("");
 
-  const filteredTrends = trends.filter(trend =>
-    trend.trend_type === filter && trend.style_name.toLowerCase().includes(searchQuery.toLowerCase())
+  useEffect(() => {
+    fetchTrends();
+  }, []);
+
+  const fetchTrends = async () => {
+    try {
+      const response = await fetch("http://localhost:8081/api/trend/trends");
+      const data = await response.json();
+      setTrends(data);
+    } catch (error) {
+      console.error("Error fetching trends:", error);
+    }
+  };
+
+  const filteredTrends = trends.filter(t =>
+    (filter === "All" || t.trend_type === filter) &&
+    (t.style_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      t.description.toLowerCase().includes(searchQuery.toLowerCase()))
   );
 
   return (
-    <div style={{ backgroundColor: '#f8f9fa', minHeight: '100vh', padding: '20px 0' }}>
-      <Container className="mt-4 p-4" style={{ maxWidth: '85vw', borderRadius: '15px', background: '#ffffff', boxShadow: '0 4px 10px rgba(0,0,0,0.1)' }}>
-        <Navbar />
-        <h1 className="text-center mb-4" style={{ fontSize: '2.5rem', fontWeight: '700', color: '#007bff' }}>🔥 Trending Styles</h1>
+    <div style={{ backgroundColor: "#000", minHeight: '100vh', padding: '0', fontFamily: "'Outfit', sans-serif" }}>
+      <Navbar />
+      <div style={{ paddingTop: "100px", paddingBottom: "50px" }}>
+        <Container fluid className="p-4">
 
-        <div className="text-center mb-4 d-flex justify-content-center flex-wrap">
-          {['Clothing Trends', 'Industry News'].map((type) => (
-            <Button key={type} onClick={() => setFilter(type)}
+          <div className="text-center mb-5">
+            <h1 style={{ fontSize: '3rem', fontWeight: '800', color: "#fff", letterSpacing: "-1px", marginBottom: "20px" }}>
+              Trending <span style={{ color: "#D4AF37" }}>Styles</span>
+            </h1>
+
+            {/* Scrollable Filter Bar */}
+            <div style={{
+              display: "flex", justifyContent: "center", gap: "10px", flexWrap: "wrap", marginBottom: "30px"
+            }}>
+              {['All', 'Clothing Trends', 'Industry News', 'Summer', 'Winter', 'Casual', 'Formal', 'Streetwear'].map((type) => (
+                <button
+                  key={type}
+                  onClick={() => setFilter(type)}
+                  style={{
+                    background: filter === type ? "#D4AF37" : "transparent",
+                    color: filter === type ? "#000" : "#aaa",
+                    border: filter === type ? "none" : "1px solid #333",
+                    padding: "8px 20px", borderRadius: "20px", cursor: "pointer",
+                    fontWeight: filter === type ? "bold" : "normal",
+                    transition: "all 0.3s ease", fontSize: "0.9rem"
+                  }}
+                >
+                  {type}
+                </button>
+              ))}
+            </div>
+
+            <Form.Control
+              type="text"
+              placeholder="Search trends..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
               style={{
-                background: filter === type ? '#007bff' : '#e0e0e0',
-                color: '#fff', border: 'none', borderRadius: '25px', padding: '10px 20px',
-                fontSize: '1rem', margin: '5px 15px', transition: '0.3s',
-                boxShadow: filter === type ? '0 4px 10px rgba(0,0,0,0.2)' : 'none'
-              }}>
-              {type}
-            </Button>
-          ))}
-        </div>
+                maxWidth: '400px', margin: '0 auto', borderRadius: '30px',
+                background: "#1a1a1a", border: "1px solid #333", color: "#fff",
+                padding: "10px 20px", textAlign: "center"
+              }}
+            />
+          </div>
 
-        <Form className="mb-4 text-center">
-          <Form.Control type="text" placeholder="Search trends..." style={{
-            maxWidth: '400px', margin: '0 auto', borderRadius: '20px', padding: '10px',
-            border: '1px solid #007bff', boxShadow: '0 2px 5px rgba(0,0,0,0.1)'
-          }} value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
-        </Form>
+          {filteredTrends.length === 0 ? (
+            <p className="text-center text-muted" style={{ fontSize: "1.2rem", marginTop: "50px" }}>No trends found matching your criteria.</p>
+          ) : (
+            <Row className="g-4">
+              {filteredTrends.filter(t => t.style_name !== 'Uploaded Style').map(trend => (
+                <Col key={trend.id} xl={3} lg={4} md={6} sm={12}>
+                  <div style={{
+                    background: "#1a1a1a",
+                    borderRadius: "15px",
+                    overflow: "hidden",
+                    border: "1px solid #333",
+                    height: "100%",
+                    transition: "transform 0.3s ease",
+                  }}
+                    onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-5px)'}
+                    onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+                  >
 
-        {filteredTrends.length === 0 ? (
-          <p className="text-center text-muted">No trends found.</p>
-        ) : (
-          <Row className="g-4 justify-content-center">
-            {filteredTrends.map(trend => (
-              <Col key={trend.id} lg={4} md={6} sm={12}>
-                <Card className="shadow-sm border-0 h-100" style={{
-                  borderRadius: '15px', transition: 'transform 0.3s ease',
-                  background: '#f8f9fa', color: '#333',
-                  boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
-                }}
-                  onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-                  onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}>
-                  <Card.Img variant="top" src={trend.pic_url} alt={trend.style_name}
-                    style={{ height: '600px', objectFit: 'cover', borderRadius: '15px 15px 0 0' }} />
-                  <Card.Body className="d-flex flex-column">
-                    <Card.Title style={{ fontWeight: 'bold', fontSize: '1.4rem', color: '#007bff' }}>{trend.style_name}</Card.Title>
-                    <Card.Text style={{ fontSize: '1rem', flexGrow: 1 }}>{trend.description}</Card.Text>
-                    {trend.size && (
-                      <Card.Text style={{ fontSize: '0.9rem', fontStyle: 'italic' }}>Available Sizes: {trend.size}</Card.Text>
-                    )}
-                    <Button style={{
-                      background: '#007bff', border: 'none', color: '#fff',
-                      borderRadius: '20px', fontSize: '1rem', width: '100%', marginTop: '10px',
-                      transition: '0.3s', boxShadow: '0 2px 5px rgba(0,0,0,0.2)'
-                    }}
-                      onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-                      onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}>
-                      Explore
-                    </Button>
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))}
-          </Row>
-        )}
-      </Container>
+                    {/* Image Container with strict 3:4 Aspect Ratio */}
+                    <div style={{ position: "relative", width: "100%", paddingTop: "133%" /* 3:4 Ratio */ }}>
+                      <img
+                        src={trend.style_pic_url}
+                        alt={trend.style_name}
+                        style={{
+                          position: "absolute", top: "0", left: "0", width: "100%", height: "100%",
+                          objectFit: "cover"
+                        }}
+                        onError={(e) => { e.target.onerror = null; e.target.src = "https://via.placeholder.com/400x600?text=No+Image" }}
+                      />
+                      <Badge bg={trend.trend_type === 'Clothing Trends' ? 'warning' : 'info'} text="dark"
+                        style={{ position: "absolute", top: "15px", left: "15px", zIndex: 1 }}>
+                        {trend.trend_type}
+                      </Badge>
+                    </div>
+
+                    <div style={{ padding: "20px" }}>
+                      <h4 style={{ color: "#fff", fontWeight: "700", fontSize: "1.2rem", marginBottom: "5px" }}>{trend.style_name}</h4>
+                      <p style={{
+                        color: "#888", fontSize: "0.9rem", marginBottom: "15px",
+                        display: "-webkit-box", WebkitLineClamp: "2", WebkitBoxOrient: "vertical", overflow: "hidden",
+                        minHeight: "40px" // Ensure text alignment
+                      }}>
+                        {trend.description}
+                      </p>
+
+                      <div className="d-flex justify-content-between align-items-center" style={{ borderTop: "1px solid #333", paddingTop: "15px" }}>
+                        <small style={{ color: "#D4AF37", fontWeight: "bold" }}>{trend.brand_name || "LoreZone"}</small>
+                        <Button size="sm" variant="outline-light" style={{ borderRadius: "20px", fontSize: "0.8rem", padding: "5px 15px" }}>View</Button>
+                      </div>
+                    </div>
+
+                  </div>
+                </Col>
+              ))}
+            </Row>
+          )}
+        </Container>
+      </div>
     </div>
   );
 };

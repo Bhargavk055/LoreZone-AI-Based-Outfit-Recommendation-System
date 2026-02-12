@@ -20,13 +20,15 @@ const auth = getAuth(app);
 function LoginPage() {
   const navigate = useNavigate();
   const [, setUser] = useState(null);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   // Google Sign-In Function
   const signInWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
     try {
       const result = await signInWithPopup(auth, provider);
-      setUser(result.user);
+      // setUser(result.user);
       alert(`Welcome, ${result.user.displayName}!`);
       navigate("/dashboard");
     } catch (error) {
@@ -35,26 +37,106 @@ function LoginPage() {
     }
   };
 
-  return (
-    <div style={styles.container}>
-      <div style={styles.card}>
-        <h2 style={styles.title}>Welcome Back</h2>
-        <input type="email" placeholder="Email" style={styles.input} />
-        <input type="password" placeholder="Password" style={styles.input} />
-        <p style={styles.forgotPassword}>Forgot Password?</p>
+  const handleLogin = async () => {
+    try {
+      const response = await fetch("http://localhost:8081/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
-        <button style={styles.loginButton}>Log In</button>
-        <button style={styles.registerButton} onClick={() => navigate("/registerpage")}>
+      const data = await response.json();
+
+      if (response.ok) {
+        localStorage.setItem("userInfo", JSON.stringify(data));
+        alert(`Welcome back, ${data.username}!`);
+
+        // Redirect based on role or default to home/dashboard
+        // UNIFIED REDIRECT: Everyone goes to Home Page
+        window.location.href = "/";
+      } else {
+        alert(data.message || "Invalid credentials");
+      }
+    } catch (error) {
+      console.error("Error logging in:", error);
+      alert("Something went wrong.");
+    }
+  };
+
+
+  return (
+    <div style={{
+      background: "#000",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      height: "100vh",
+      transition: "all 0.3s ease",
+      width: "100vw"
+    }}>
+      <div style={{
+        background: "#1a1a1a",
+        padding: "40px",
+        borderRadius: "12px",
+        boxShadow: "0 4px 20px rgba(0, 0, 0, 0.2)",
+        width: "350px",
+        textAlign: "center",
+        border: "1px solid #333"
+      }}>
+        <h2 style={{ fontSize: "24px", fontWeight: "bold", marginBottom: "20px", color: "#FFFFFF" }}>Welcome Back</h2>
+        <input
+          type="text"
+          placeholder="Email or Username"
+          style={{
+            width: "100%", padding: "12px", margin: "10px 0", border: "1px solid #333", borderRadius: "5px",
+            background: "#333", color: "#fff"
+          }}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          style={{
+            width: "100%", padding: "12px", margin: "10px 0", border: "1px solid #333", borderRadius: "5px",
+            background: "#333", color: "#fff"
+          }}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <p
+          style={{ fontSize: "14px", color: "#aaa", cursor: "pointer" }}
+          onClick={async () => {
+            const resetEmail = prompt("Enter your email to reset password:");
+            if (resetEmail) {
+              // ...
+            }
+          }}
+        >
+          Forgot Password?
+        </p>
+
+        <button style={{
+          width: "100%", padding: "12px", marginTop: "10px", borderRadius: "5px", border: "none", cursor: "pointer", fontSize: "16px",
+          background: "#D4AF37", color: "#000"
+        }} onClick={handleLogin}>Log In</button>
+        <button style={{
+          width: "100%", padding: "12px", marginTop: "10px", borderRadius: "5px", border: "1px solid #555", cursor: "pointer", fontSize: "16px",
+          background: "transparent", color: "#aaa"
+        }} onClick={() => navigate("/registerpage")}>
           Register
         </button>
 
-        <p style={styles.orText}>Or</p>
+        <p style={{ marginTop: "20px", fontSize: "16px", color: "#aaa" }}>Or</p>
 
-        <button style={styles.googleButton} onClick={signInWithGoogle}>
+        <button style={{
+          display: "flex", alignItems: "center", justifyContent: "center", width: "100%", padding: "12px", borderRadius: "5px", cursor: "pointer", fontSize: "16px", border: "none",
+          background: "#fff", color: "#000", boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)"
+        }} onClick={signInWithGoogle}>
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"
             alt="Google Logo"
-            style={styles.googleLogo}
+            style={{ width: "20px", marginRight: "10px" }}
           />
           Continue with Google
         </button>
@@ -62,93 +144,5 @@ function LoginPage() {
     </div>
   );
 }
-
-// Inline Styles
-const styles = {
-  container: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    height: "100vh",
-    background: "#1e1e1e",
-  },
-  card: {
-    background: "#f5f5dc",
-    padding: "40px",
-    borderRadius: "12px",
-    boxShadow: "0 4px 20px rgba(255, 255, 255, 0.2)",
-    width: "350px",
-    textAlign: "center",
-  },
-  title: {
-    fontSize: "24px",
-    fontWeight: "bold",
-    marginBottom: "20px",
-    color: "#1e1e1e",
-  },
-  input: {
-    width: "100%",
-    padding: "12px",
-    margin: "10px 0",
-    border: "1px solid #444",
-    borderRadius: "5px",
-    fontSize: "16px",
-    outline: "none",
-    background: "#222",
-    color: "#f5f5dc",
-  },
-  forgotPassword: {
-    fontSize: "14px",
-    color: "#777",
-    cursor: "pointer",
-  },
-  loginButton: {
-    width: "100%",
-    padding: "12px",
-    marginTop: "10px",
-    borderRadius: "5px",
-    border: "none",
-    cursor: "pointer",
-    fontSize: "16px",
-    background: "#1e1e1e",
-    color: "#f5f5dc",
-    transition: "all 0.3s ease-in-out",
-  },
-  registerButton: {
-    width: "100%",
-    padding: "12px",
-    marginTop: "10px",
-    borderRadius: "5px",
-    border: "none",
-    cursor: "pointer",
-    fontSize: "16px",
-    background: "#444",
-    color: "#f5f5dc",
-    transition: "all 0.3s ease-in-out",
-  },
-  orText: {
-    marginTop: "20px",
-    fontSize: "16px",
-    color: "#555",
-  },
-  googleButton: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "100%",
-    padding: "12px",
-    borderRadius: "5px",
-    cursor: "pointer",
-    fontSize: "16px",
-    border: "none",
-    background: "#fff",
-    boxShadow: "0 2px 10px rgba(255, 255, 255, 0.1)",
-    transition: "all 0.3s ease-in-out",
-  },
-  googleLogo: {
-    width: "20px",
-    marginRight: "10px",
-  },
-};
 
 export default LoginPage;

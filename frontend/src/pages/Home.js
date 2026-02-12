@@ -4,13 +4,14 @@ import { useEffect, useState } from "react"
 import Navbar from "./Navbar"
 import axios from "axios"
 
+
 function Home() {
   const [brands, setBrands] = useState([])
 
   useEffect(() => {
     const fetchBrands = async () => {
       try {
-        const response = await axios.get("https://lorezone.onrender.com/api/brand/brands")
+        const response = await axios.get("http://localhost:8081/api/brand/brands")
         setBrands(response.data)
       } catch (error) {
         console.error("Error fetching brands:", error)
@@ -20,7 +21,7 @@ function Home() {
   }, [])
 
   const Brandsnearyou = () => {
-    window.location.href = "/Brandsnearyou"; // Redirect to the "Brands Near You" page
+    window.location.href = "/Brandsnearyou";
   }
 
   const scrollToAbout = () => {
@@ -30,32 +31,33 @@ function Home() {
   return (
     <div
       className="container-fluid px-4"
-      // style={{ fontFamily: "Poppins, sans-serif", backgroundColor: "#FFFFF", paddingTop: "80px" }}
       style={{
         fontFamily: "Poppins, sans-serif",
-        backgroundColor: "#FFFFFF",
+        backgroundColor: "#000",
+        color: "#fff",
         paddingTop: "80px",
+        minHeight: "100vh",
+        transition: "background 0.3s ease" // Smooth transition
       }}
     >
-      {/* <div className="mb-3">
-        <Navbar /><br/><br/>
+      <div className="text-center">
+        <Navbar />
+        <br />
         <img
-  src="/images/Logo.jpg"
-  alt="Lore Zone Logo"
-  className="img-fluid rounded shadow-lg"
-  style={{ width: "1000px", height: "800px", objectFit: "cover" }}
-/> */}
-<div className="text-center">
-    <Navbar />
-    <br />
-    <img
-      src="/images/dheeraj.png"
-      alt="Lore Zone Logo"
-      style={{ width: "700px", height: "600px", objectFit: "cover" }}
-    />
+          src="/images/dheeraj.png"
+          alt="Lore Zone Logo"
+          style={{
+            width: "700px",
+            height: "600px",
+            objectFit: "cover",
+            // FIX: If Dark Mode, add a White Glow so the dark logo pops out
+            filter: "drop-shadow(0 0 20px rgba(255, 255, 255, 0.3))",
+            transition: "filter 0.3s ease"
+          }}
+        />
       </div>
       <div className="text-center">
-        
+
         <button
           className="btn px-4 py-6 mt-3"
           style={{

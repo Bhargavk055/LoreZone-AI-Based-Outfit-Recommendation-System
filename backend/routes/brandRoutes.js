@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { getEvents } = require('../controllers/brandController');
+const { getBrands } = require('../controllers/brandController');
 
-router.get('/brands', getEvents);
+router.get('/brands', getBrands);
 
 module.exports = router;

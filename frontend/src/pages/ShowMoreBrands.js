@@ -20,15 +20,16 @@ function ShowMoreBrands() {
     <section
       className="mt-5"
       style={{
-        backgroundColor: "#ffffff", // Set white background
+        backgroundColor: "#1a1a1a",
         padding: "40px",
         borderRadius: "20px",
-        boxShadow: "0 4px 15px rgba(0,0,0,0.05)"
+        boxShadow: "0 4px 15px rgba(0,0,0,0.05)",
+        border: "1px solid #333"
       }}
     >
-      <h2 className="text-center fw-bold" style={{ color: "#8B5E3C", fontSize: "2rem" }}>More Brands</h2>
-      <p className="text-center" style={{ color: "#6d4c41", fontSize: "1.1rem" }}>Explore top fashion brands</p>
-      
+      <h2 className="text-center fw-bold" style={{ color: "#D4AF37", fontSize: "2rem" }}>More Brands</h2>
+      <p className="text-center" style={{ color: "#aaa", fontSize: "1.1rem" }}>Explore top fashion brands</p>
+
       <div className="row mt-4">
         {showBrands &&
           brandData.map((brand) => (
@@ -37,8 +38,8 @@ function ShowMoreBrands() {
                 className="card shadow-sm p-3 border-0"
                 style={{
                   borderRadius: "15px",
-                  background: "linear-gradient(to right, #fff8f0, #f0e1d0)",
-                  border: "1px solid #d1b38a",
+                  background: "linear-gradient(to right, #333, #444)",
+                  border: "1px solid #333",
                   transition: "0.3s",
                 }}
               >
@@ -49,9 +50,9 @@ function ShowMoreBrands() {
                   style={{ maxHeight: "150px", objectFit: "contain" }}
                 />
                 <div className="card-body">
-                  <h5 className="card-title" style={{ color: "#8B5E3C", fontWeight: "bold" }}>{brand.name}</h5>
-                  <p className="card-text" style={{ color: "#6d4c41" }}>Location: {brand.location}</p>
-                  <p style={{ fontWeight: "bold", color: "#A46A3F" }}>{brand.offer}</p>
+                  <h5 className="card-title" style={{ color: "#D4AF37", fontWeight: "bold" }}>{brand.name}</h5>
+                  <p className="card-text" style={{ color: "#fff" }}>Location: {brand.location}</p>
+                  <p style={{ fontWeight: "bold", color: "#aaa" }}>{brand.offer}</p>
                 </div>
               </div>
             </div>
@@ -63,10 +64,10 @@ function ShowMoreBrands() {
           className="btn px-4 py-2"
           style={{
             borderRadius: "30px",
-            background: "linear-gradient(to right, #e0b580, #b17b49)",
+            background: "#D4AF37",
             border: "none",
             fontWeight: "bold",
-            color: "#ffffff",
+            color: "#000",
             fontSize: "1rem",
             transition: "0.3s",
           }}
