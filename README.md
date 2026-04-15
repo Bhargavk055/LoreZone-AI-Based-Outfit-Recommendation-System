@@ -1,4 +1,4 @@
-# 👗 LoreZone – Smart Outfit Recommendation System
+# LoreZone – Smart Outfit Recommendation System
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Site-brightgreen)](https://astonishing-travesseiro-449987.netlify.app/)
 [![React](https://img.shields.io/badge/React-19.0.0-blue)](https://reactjs.org/)
@@ -7,13 +7,13 @@
 
 LoreZone is an intelligent **outfit recommendation system** that provides personalized clothing suggestions based on user characteristics including **skin tone, height, occasion, and budget**. Beyond outfit recommendations, it serves as a comprehensive fashion platform featuring **ongoing offers**, **fashion events**, **career opportunities**, and **trending styles**.
 
-## 🌐 Live Demo
+## Live Demo
 
 **Visit the live application:** [https://astonishing-travesseiro-449987.netlify.app/](https://astonishing-travesseiro-449987.netlify.app/)
 
 ---
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [Features](#-features)
 - [Tech Stack](#️-tech-stack)
@@ -26,47 +26,47 @@ LoreZone is an intelligent **outfit recommendation system** that provides person
 
 ---
 
-## 🚀 Features
+## Features
 
-### 🧥 Smart Outfit Recommendation
+### Smart Outfit Recommendation
 - **Personalized suggestions** based on:
-  - 🎨 Skin tone
-  - 📏 Height
-  - 🎯 Occasion (casual, formal, party, etc.)
-  - 💰 Price range/budget
+  -  Skin tone
+  -  Height
+  -  Occasion (casual, formal, party, etc.)
+  -  Price range/budget
 
-### 💸 Offers & Deals
+### Offers & Deals
 - Real-time display of **ongoing fashion offers** from various brands
 - **Price comparison** and discount tracking
 - **Brand-specific deals** and promotions
 
-### 🎉 Fashion Events
+### Fashion Events
 - Comprehensive listing of **upcoming fashion events**
 - **Event details** including dates, venues, and registration info
 - Stay updated with the latest fashion shows and exhibitions
 
-### 💼 Career Opportunities (Dream Big)
+### Career Opportunities (Dream Big)
 - Curated list of **fashion industry job openings**
 - **Career opportunities** in design, retail, and fashion tech
 - Direct application links and job requirements
 
-### 🔥 Trending Styles & News
+### Trending Styles & News
 - Latest **fashion trends** and style inspiration
 - **Fashion news** and industry updates
 - **Seasonal trends** and styling tips
 
-### 📸 Watch Me (Community Showcase)
+### Watch Me (Community Showcase)
 - User-generated content platform
 - Share and discover **popular looks**
 - Browse **outfit inspiration** from the community
 - Interactive **photo gallery** of fashion enthusiasts
 
-### 🏪 Brands Near You
+### Brands Near You
 - Discover local fashion stores and boutiques
 - Location-based brand recommendations
 - Store details and contact information
 
-### 👤 User Features
+### User Features
 - User authentication and profile management
 - Personalized dashboard
 - Save favorite outfits and brands
@@ -74,7 +74,7 @@ LoreZone is an intelligent **outfit recommendation system** that provides person
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Frontend
 - **React.js** (v19.0.0) - UI framework
@@ -108,7 +108,7 @@ LoreZone is an intelligent **outfit recommendation system** that provides person
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 LoreZone/
@@ -190,7 +190,7 @@ LoreZone/
 
 ---
 
-## 🚀 Installation
+## Installation
 
 ### Prerequisites
 - **Node.js** (v14 or higher)
@@ -198,14 +198,14 @@ LoreZone/
 - **MySQL** (v8.0 or higher)
 - **Git**
 
-### 1️⃣ Clone the Repository
+### Clone the Repository
 
 ```bash
 git clone https://github.com/Bhargavk055/LoreZone-AI-Based-Outfit-Recommendation-System.git
 cd LoreZone-AI-Based-Outfit-Recommendation-System
 ```
 
-### 2️⃣ Backend Setup
+### Backend Setup
 
 ```bash
 # Navigate to backend directory
@@ -236,7 +236,7 @@ npm start
 
 The backend server will run on `http://localhost:5000`
 
-### 3️⃣ Frontend Setup
+### Frontend Setup
 
 Open a new terminal window:
 
@@ -265,7 +265,7 @@ npm start
 
 The application will open in your browser at `http://localhost:3000`
 
-### 4️⃣ Database Setup
+### Database Setup
 
 ```sql
 -- Create database
@@ -279,7 +279,7 @@ USE lorezone;
 
 ---
 
-## 💻 Usage
+## Usage
 
 1. **Register/Login**: Create an account or login to access personalized features
 2. **Explore**: Browse through different sections:
@@ -294,7 +294,7 @@ USE lorezone;
 
 ---
 
-## 🔌 API Endpoints
+## API Endpoints
 
 ### Authentication
 - `POST /api/auth/register` - Register new user
